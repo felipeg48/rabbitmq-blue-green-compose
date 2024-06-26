@@ -1,0 +1,25 @@
+= RabbitMQ Clusters - Blue/Green Deployments
+
+*Blue*
+
+[source,shell]
+----
+docker compose -f compose-blue.yaml up
+----
+
+- http://localhost:15672[^]
+
+NOTE: Opens ports: `15672`  for Web Console with credentials `admin`:`admin`.
+
+
+*Green*
+
+[source,shell]
+----
+docker compose -f compose-green.yaml up
+----
+
+- http://localhost:15682[^]
+
+
+NOTE: Opens ports: `15682`  for Web Console with credentials `admin`:`admin`.
