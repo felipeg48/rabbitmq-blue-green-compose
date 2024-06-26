@@ -1,2 +1,7 @@
 .DS_Store
 .vscode/
+.idea/
+.zed/
+build/
+obj/
+bin/
