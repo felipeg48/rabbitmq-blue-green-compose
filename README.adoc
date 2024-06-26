@@ -1,5 +1,7 @@
 = RabbitMQ Clusters - Blue/Green Deployments
 
+A docker compose solution to create 2 clusters to execute Blue/Green deployments.
+
 *Blue*
 
 [source,shell]
