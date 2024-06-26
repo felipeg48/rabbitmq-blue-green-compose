@@ -2,6 +2,8 @@
 
 A docker compose solution to create 2 clusters to execute Blue/Green deployments.
 
+- The `app` folder has some small programs as playground for shovel, federation and gather definitions. 
+
 *Blue*
 
 [source,shell]
