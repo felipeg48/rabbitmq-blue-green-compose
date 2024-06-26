@@ -34,3 +34,11 @@ docker compose -f compose-green.yaml up
 |5682  | AMQP
 |1946  | HAProxy Console with credentials `admin`/`admin`
 |===
+
+Check out the following Projects (for now there are written in C#):
+
+
+- Infrastructure: https://github.com/felipeg48/infra-blue-green-deployment[^]
+- RabbitMQ: https://github.com/felipeg48/rabbitmq-blue-green-deployment[^]
+
+WARNING: The above projects are private for now, but I will make them public soon.
