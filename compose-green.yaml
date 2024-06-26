@@ -1,0 +1,75 @@
+version: "3"
+services:
+    green-rabbit1:
+        image: "rabbitmq:management-alpine"
+        hostname: "green-rabbit1"
+        container_name: "green-rabbit1"
+        networks:
+            - rabbits
+        environment:
+            RABBITMQ_ERLANG_COOKIE: "COOKIEMONSTER"
+            RABBITMQ_DEFAULT_USER: "admin"
+            RABBITMQ_DEFAULT_PASS: "admin"
+            RABBITMQ_DEFAULT_VHOST: "/"
+            RABBITMQ_NODENAME: "rabbit"
+            RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: "+S 4:4 +sbwt none +sbwtdcpu none +sbwtdio none"
+            # RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: "-rabbit cluster_partition_handling [pause_minority]"            
+        entrypoint: /usr/local/bin/cluster-entrypoint.sh
+        volumes:
+          - ${PWD}/rabbit-configs/enabled_plugins:/etc/rabbitmq/enabled_plugins:ro
+          - ${PWD}/cluster-entrypoint.sh:/usr/local/bin/cluster-entrypoint.sh
+
+    green-rabbit2:
+        image: "rabbitmq:management-alpine"
+        hostname: "green-rabbit2"
+        container_name: "green-rabbit2"
+        networks:
+            - rabbits
+        environment:
+            RABBITMQ_ERLANG_COOKIE: "COOKIEMONSTER"
+            RABBITMQ_DEFAULT_USER: "admin"
+            RABBITMQ_DEFAULT_PASS: "admin"
+            RABBITMQ_DEFAULT_VHOST: "/"
+            RABBITMQ_NODENAME: "rabbit"
+            RABBITMQ_PARENT_NODENAME: "green-rabbit1"
+            # RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: "-rabbit cluster_partition_handling [pause_minority]"
+        entrypoint: /usr/local/bin/cluster-entrypoint.sh
+        volumes:
+          - ${PWD}/rabbit-configs/enabled_plugins:/etc/rabbitmq/enabled_plugins:ro
+          - ${PWD}/cluster-entrypoint.sh:/usr/local/bin/cluster-entrypoint.sh
+    
+    green-rabbit3:
+        image: "rabbitmq:management-alpine"
+        hostname: "green-rabbit3"
+        container_name: "green-rabbit3"
+        networks:
+            - rabbits
+        environment:
+            RABBITMQ_ERLANG_COOKIE: "COOKIEMONSTER"
+            RABBITMQ_DEFAULT_USER: "admin"
+            RABBITMQ_DEFAULT_PASS: "admin"
+            RABBITMQ_DEFAULT_VHOST: "/"
+            RABBITMQ_NODENAME: "rabbit"
+            RABBITMQ_PARENT_NODENAME: "green-rabbit1"
+            # RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: "-rabbit cluster_partition_handling [pause_minority]"
+        entrypoint: /usr/local/bin/cluster-entrypoint.sh
+        volumes:
+          - ${PWD}/rabbit-configs/enabled_plugins:/etc/rabbitmq/enabled_plugins:ro
+          - ${PWD}/cluster-entrypoint.sh:/usr/local/bin/cluster-entrypoint.sh
+          
+    green-haproxy:
+        image: "haproxy:alpine"
+        hostname: "green-haproxy"
+        container_name: "green-haproxy"
+        networks:
+            - rabbits
+        ports:
+            - "5682:5672"
+            - "15682:15672"
+            - "1946:1936"
+        volumes:
+            - "./haproxy-green.cfg:/usr/local/etc/haproxy/haproxy.cfg"
+
+networks:
+    rabbits:
+        driver: bridge

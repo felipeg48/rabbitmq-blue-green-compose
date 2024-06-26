@@ -1,0 +1,76 @@
+{
+  "rabbit_version": "3.13.0",
+  "rabbitmq_version": "3.13.0",
+  "product_name": "RabbitMQ",
+  "product_version": "3.13.0",
+  "users": [
+    {
+      "name": "admin",
+      "password_hash": "tFpOhWPUNpCHhhcu33eiBTxhj6xfiKR6ddT6RR9weSXazKUy",
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "tags": ["administrator"],
+      "limits": {}
+    }
+  ],
+  "vhosts": [{ "name": "/" }],
+  "permissions": [
+    {
+      "user": "admin",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
+  "topic_permissions": [],
+  "parameters": [
+    {
+      "value": {
+        "ack-mode": "on-confirm",
+        "dest-add-forward-headers": false,
+        "dest-protocol": "amqp091",
+        "dest-queue": "dest-queue",
+        "dest-uri": "amqp://",
+        "src-delete-after": "never",
+        "src-protocol": "amqp091",
+        "src-queue": "src-queue",
+        "src-uri": "amqp://"
+      },
+      "vhost": "/",
+      "component": "shovel",
+      "name": "my-shovel"
+    }
+  ],
+  "global_parameters": [
+    {
+      "name": "internal_cluster_id",
+      "value": "rabbitmq-cluster-id-Qi3hlYUCT_aT8gl8qZapxA"
+    }
+  ],
+  "policies": [],
+  "queues": [
+    {
+      "name": "dest-queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "src-queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "simple",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": { "x-queue-type": "quorum" }
+    }
+  ],
+  "exchanges": [],
+  "bindings": []
+}

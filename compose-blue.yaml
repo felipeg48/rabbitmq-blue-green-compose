@@ -1,0 +1,74 @@
+version: "3"
+services:
+    blue-rabbit1:
+        image: "rabbitmq:management-alpine"
+        hostname: "blue-rabbit1"
+        container_name: "blue-rabbit1"
+        networks:
+            - rabbits
+        environment:
+            RABBITMQ_ERLANG_COOKIE: "COOKIEMONSTER"
+            RABBITMQ_DEFAULT_USER: "admin"
+            RABBITMQ_DEFAULT_PASS: "admin"
+            RABBITMQ_DEFAULT_VHOST: "/"
+            RABBITMQ_NODENAME: "rabbit"
+            # RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: "-rabbit cluster_partition_handling [pause_minority]"            
+        entrypoint: /usr/local/bin/cluster-entrypoint.sh
+        volumes:
+          - ${PWD}/rabbit-configs/enabled_plugins:/etc/rabbitmq/enabled_plugins:ro
+          - ${PWD}/cluster-entrypoint.sh:/usr/local/bin/cluster-entrypoint.sh
+          
+    blue-rabbit2:
+        image: "rabbitmq:management-alpine"
+        hostname: "blue-rabbit2"
+        container_name: "blue-rabbit2"
+        networks:
+            - rabbits
+        environment:
+            RABBITMQ_ERLANG_COOKIE: "COOKIEMONSTER"
+            RABBITMQ_DEFAULT_USER: "admin"
+            RABBITMQ_DEFAULT_PASS: "admin"
+            RABBITMQ_DEFAULT_VHOST: "/"
+            RABBITMQ_NODENAME: "rabbit"
+            RABBITMQ_PARENT_NODENAME: "blue-rabbit1"
+            # RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: "-rabbit cluster_partition_handling [pause_minority]"
+        entrypoint: /usr/local/bin/cluster-entrypoint.sh
+        volumes:
+          - ${PWD}/rabbit-configs/enabled_plugins:/etc/rabbitmq/enabled_plugins:ro
+          - ${PWD}/cluster-entrypoint.sh:/usr/local/bin/cluster-entrypoint.sh
+
+    blue-rabbit3:
+        image: "rabbitmq:management-alpine"
+        hostname: "blue-rabbit3"
+        container_name: "blue-rabbit3"
+        networks:
+            - rabbits
+        environment:
+            RABBITMQ_ERLANG_COOKIE: "COOKIEMONSTER"
+            RABBITMQ_DEFAULT_USER: "admin"
+            RABBITMQ_DEFAULT_PASS: "admin"
+            RABBITMQ_DEFAULT_VHOST: "/"
+            RABBITMQ_NODENAME: "rabbit"
+            RABBITMQ_PARENT_NODENAME: "blue-rabbit1"
+            # RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: "-rabbit cluster_partition_handling [pause_minority]"
+        entrypoint: /usr/local/bin/cluster-entrypoint.sh
+        volumes:
+          - ${PWD}/rabbit-configs/enabled_plugins:/etc/rabbitmq/enabled_plugins:ro
+          - ${PWD}/cluster-entrypoint.sh:/usr/local/bin/cluster-entrypoint.sh
+
+    blue-haproxy:
+        image: "haproxy:alpine"
+        hostname: "blue-haproxy"
+        container_name: "blue-haproxy"
+        networks:
+            - rabbits
+        ports:
+            - "5672:5672"
+            - "15672:15672"
+            - "1936:1936"
+        volumes:
+            - ${PWD}/haproxy-blue.cfg:/usr/local/etc/haproxy/haproxy.cfg
+
+networks:
+    rabbits:
+        driver: bridge

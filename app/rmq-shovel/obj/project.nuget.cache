@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "e5kO2JDbC3GB12SI3iuW1GYHeUPhvWhP4W9VgZua+PuASBeZn7s6PhD5HID5QcdimLmLm2nFf379ldtfgHaH8g==",
+  "success": true,
+  "projectFilePath": "/Users/felipeg/Progs/Services/RabbitMQ/docker-compose/app/rmq-experian/rmq-experian.csproj",
+  "expectedPackageFiles": [
+    "/Users/felipeg/.nuget/packages/rabbitmq.client/6.8.1/rabbitmq.client.6.8.1.nupkg.sha512",
+    "/Users/felipeg/.nuget/packages/system.memory/4.5.5/system.memory.4.5.5.nupkg.sha512",
+    "/Users/felipeg/.nuget/packages/system.threading.channels/7.0.0/system.threading.channels.7.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
