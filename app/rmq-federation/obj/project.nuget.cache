@@ -1,8 +1,0 @@
-{
-  "version": 2,
-  "dgSpecHash": "2lkJKQ97qQMh4LZmBg62qLggOJSxOlr/H3t+GNkyTdhPxo2u++7TxEb/L8A3Ay5sUPtvNqre9GVE5U6ZTudELw==",
-  "success": true,
-  "projectFilePath": "/Users/felipeg/Progs/Services/RabbitMQ/docker-compose/app/rmq-federation/rmq-federation.csproj",
-  "expectedPackageFiles": [],
-  "logs": []
-}

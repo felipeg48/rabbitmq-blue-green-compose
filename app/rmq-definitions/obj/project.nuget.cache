@@ -1,8 +1,0 @@
-{
-  "version": 2,
-  "dgSpecHash": "oxcF7LTTg0z65PhpCOtPywmZrtLAoS8JgS1RY4Ig57HD9FDNAi+f/IjBwawJiFuaQ0C8l/lln2KV/P8i4RdPZA==",
-  "success": true,
-  "projectFilePath": "/Users/felipeg/Progs/Services/RabbitMQ/docker-compose/app/rmq-definitions/rmq-definitions.csproj",
-  "expectedPackageFiles": [],
-  "logs": []
-}
