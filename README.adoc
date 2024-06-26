@@ -9,7 +9,7 @@ docker compose -f compose-blue.yaml up
 
 - http://localhost:15672[^]
 
-NOTE: Opens ports: `15672`  for Web Console with credentials `admin`:`admin`.
+NOTE: Opens ports: `15672`  for Web Console with credentials `admin`/`admin`. Port: `5672` for AMQP. Port :`1936` for HAProxy Console.
 
 
 *Green*
@@ -22,4 +22,4 @@ docker compose -f compose-green.yaml up
 - http://localhost:15682[^]
 
 
-NOTE: Opens ports: `15682`  for Web Console with credentials `admin`:`admin`.
+NOTE: Opens ports: `15682`  for Web Console with credentials `admin`/``admin`. Port: `5682` for AMQP. Port :`1946` for HAProxy Console.
